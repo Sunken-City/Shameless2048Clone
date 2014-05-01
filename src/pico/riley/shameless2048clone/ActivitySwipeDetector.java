@@ -1,5 +1,6 @@
 package pico.riley.shameless2048clone;
 
+import pico.riley.shameless2048clone.Game.Direction;
 import android.app.Activity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,6 +14,7 @@ static final String logTag = "ActivitySwipeDetector";
 private Activity activity;
 static final int MIN_DISTANCE = 100;
 private float downX, downY, upX, upY;
+private Game g = new Game();
 
 public ActivitySwipeDetector(Activity activity){
     this.activity = activity;
@@ -20,22 +22,26 @@ public ActivitySwipeDetector(Activity activity){
 
 public void onLeftSwipe(){
     Log.i(logTag, "Left Swipe!");
-    ((MainActivity) activity).onLeftSwipe();
+    g.makeMove(Direction.LEFT);
+    //((MainActivity) activity).onLeftSwipe();
 }
 
 public void onRightSwipe(){
     Log.i(logTag, "Right Swipe!");
-    ((MainActivity) activity).onRightSwipe();
+    g.makeMove(Direction.RIGHT);
+    //((MainActivity) activity).onRightSwipe();
 }
 
 public void onDownSwipe(){
     Log.i(logTag, "Down Swipe!");
-    ((MainActivity) activity).onDownSwipe();
+    g.makeMove(Direction.DOWN);
+    //((MainActivity) activity).onDownSwipe();
 }
 
 public void onUpSwipe(){
     Log.i(logTag, "Up Swipe!");
-    ((MainActivity) activity).onUpSwipe();
+    g.makeMove(Direction.UP);
+    //((MainActivity) activity).onUpSwipe();
 }
 
 public boolean onTouch(View v, MotionEvent event) {
