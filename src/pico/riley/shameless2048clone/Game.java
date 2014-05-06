@@ -14,6 +14,9 @@ public class Game {
 		rand = new Random();
 		board = new int[4][4];
 		addTwo();
+		Log.i("GAME", "Welcome to 2048!");
+		Log.i("GAME", "----------------------------");
+		print();
 	}
 	
 	public void print()
@@ -27,7 +30,7 @@ public class Game {
 			}
 			Log.i("GAME", s);
 		}	
-	    
+		Log.i("GAME", "----------------------------");
 	}
 	
 	public boolean makeMove(Direction dir)
@@ -42,42 +45,56 @@ public class Game {
 	{
 		if (dir == Direction.LEFT)
 		{
-			for(int y = 1; y < 4; y++)
+			for(int y = 0; y < 4; y++)
 			{
 				for(int x = 1; x < 4; x++)
 				{
 					int thisTile = board[y][x];
-					int prevTile = board[y][x-1];
-					if(prevTile == 0)
+					int nextTile = board[y][x-1];
+					if (thisTile != 0)
 					{
-						board[y][x-1] = thisTile;
-						board[y][x] = 0;
-					}
-					else if (prevTile == thisTile)
-					{
-						board[y][x-1] = thisTile + prevTile;
-						board[y][x] = 0;
+						int currX = x;
+						while (nextTile == 0)
+						{
+							board[y][currX] = 0; //Set this tile to 0
+							currX--;
+							board[y][currX] = thisTile; //Move the tile to the left one
+							nextTile = (currX - 1 > -1) ? board[y][currX - 1] : -1; //Set the next tile to the next tile left
+						}
+						
+						if (nextTile == thisTile)
+						{
+							board[y][currX - 1] = thisTile + nextTile;
+							board[y][currX] = 0;
+						}
 					}
 				}
 			}
 		}
 		else if (dir == Direction.RIGHT)
 		{
-			for(int y = 1; y < 4; y++)
+			for(int y = 0; y < 4; y++)
 			{
 				for(int x = 2; x > -1; x--)
 				{
 					int thisTile = board[y][x];
-					int prevTile = board[y][x+1];
-					if(prevTile == 0)
+					int nextTile = board[y][x+1];
+					if (thisTile != 0)
 					{
-						board[y][x+1] = thisTile;
-						board[y][x] = 0;
-					}
-					else if (prevTile == thisTile)
-					{
-						board[y][x+1] = thisTile + prevTile;
-						board[y][x] = 0;
+						int currX = x;
+						while (nextTile == 0 && currX < 4)
+						{
+							board[y][currX] = 0; //Set this tile to 0
+							currX++;
+							board[y][currX] = thisTile; //Move the tile to the right one
+							nextTile = (currX + 1 < 4) ? board[y][currX + 1] : -1; //Set the next tile to the next tile right
+						}
+						
+						if (nextTile == thisTile)
+						{
+							board[y][currX + 1] = thisTile + nextTile;
+							board[y][currX] = 0;
+						}
 					}
 				}
 			}
@@ -86,19 +103,26 @@ public class Game {
 		{
 			for(int y = 1; y < 4; y++)
 			{
-				for(int x = 1; x < 4; x++)
+				for(int x = 0; x < 4; x++)
 				{
 					int thisTile = board[y][x];
-					int prevTile = board[y-1][x];
-					if(prevTile == 0)
+					int nextTile = board[y-1][x];
+					if (thisTile != 0)
 					{
-						board[y-1][x] = thisTile;
-						board[y][x] = 0;
-					}
-					else if (prevTile == thisTile)
-					{
-						board[y-1][x] = thisTile + prevTile;
-						board[y][x] = 0;
+						int currY = y;
+						while (nextTile == 0)
+						{
+							board[currY][x] = 0; //Set this tile to 0
+							currY--;
+							board[currY][x] = thisTile; //Move the tile to the upper one
+							nextTile = (currY - 1 > -1) ? board[currY - 1][x] : -1; //Set the next tile to the next tile up
+						}
+						
+						if (nextTile == thisTile)
+						{
+							board[currY - 1][x] = thisTile + nextTile;
+							board[currY][x] = 0;
+						}
 					}
 				}
 			}
@@ -107,19 +131,26 @@ public class Game {
 		{
 			for(int y = 2; y > -1; y--)
 			{
-				for(int x = 1; x < 4; x++)
+				for(int x = 0; x < 4; x++)
 				{
 					int thisTile = board[y][x];
-					int prevTile = board[y+1][x];
-					if(prevTile == 0)
+					int nextTile = board[y+1][x];
+					if (thisTile != 0)
 					{
-						board[y+1][x] = thisTile;
-						board[y][x] = 0;
-					}
-					else if (prevTile == thisTile)
-					{
-						board[y+1][x] = thisTile + prevTile;
-						board[y][x] = 0;
+						int currY = y;
+						while (nextTile == 0)
+						{
+							board[currY][x] = 0; //Set this tile to 0
+							currY++;
+							board[currY][x] = thisTile; //Move the tile to the upper one
+							nextTile = (currY + 1 < 4) ? board[currY + 1][x] : -1; //Set the next tile to the next tile up
+						}
+						
+						if (nextTile == thisTile)
+						{
+							board[currY + 1][x] = thisTile + nextTile;
+							board[currY][x] = 0;
+						}
 					}
 				}
 			}
