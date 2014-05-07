@@ -7,13 +7,11 @@
     tools:ignore="MergeRootFrame">
         
     <TextView android:id="@+id/titleText"
+        style="@style/titleTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:textSize="70sp"
-        android:textColor="#776E65"
-        android:textStyle="bold"
         android:text="@string/title"
         android:lineSpacingExtra="-15sp"/>
     
@@ -28,19 +26,16 @@
         android:layout_marginRight="5dp"
         android:background="@drawable/scorebox">
         <TextView android:id="@+id/bestScoreLabel"
+            style="@style/scoreLabel"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center_horizontal"
-	        android:textColor="#eee4da"
-	        android:textStyle="bold"
 	        android:text="@string/best"/>
         <TextView android:id="@+id/bestScoreText"
+            style="@style/scoreText"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_horizontal"
-	        android:textColor="#F9F6F2"
-	        android:textStyle="bold"
-	        android:textSize="25sp"/>
+	        android:layout_gravity="center_horizontal"/>
     </LinearLayout>
     
     <LinearLayout android:id="@+id/scoreBox"
@@ -52,19 +47,16 @@
         android:padding = "5dp"
         android:background="@drawable/scorebox">
         <TextView android:id="@+id/scoreLabel"
+            style="@style/scoreLabel"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center_horizontal"
-	        android:textColor="#eee4da"
-	        android:textStyle="bold"
 	        android:text="@string/score"/>
         <TextView android:id="@+id/scoreText"
+            style="@style/scoreText"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_horizontal"
-	        android:textColor="#F9F6F2"
-	        android:textStyle="bold"
-	        android:textSize="25sp"/>
+	        android:layout_gravity="center_horizontal"/>
     </LinearLayout>    
     
     <GridView
@@ -85,14 +77,12 @@
 	
     
     <TextView android:id="@+id/gameOverText"
-         android:visibility="gone"
-	     android:layout_width="wrap_content"
-	     android:layout_height="wrap_content"
-	     android:layout_centerInParent="true"
-	     android:textColor="#F9F6F2"
-	     android:textStyle="bold"
-	     android:textSize="60sp"
-	     android:text="@string/gameOver"/>
+        style="@style/titleTheme"
+        android:visibility="gone"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerInParent="true"
+	    android:text="@string/gameOver"/>
 	
 </RelativeLayout>
 <!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
