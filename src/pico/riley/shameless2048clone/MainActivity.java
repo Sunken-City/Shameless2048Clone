@@ -48,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
     public void loseGame()
     {
     	gameOverText.setVisibility(View.VISIBLE);
+    	gameOverText.getBackground().setAlpha(128);
     }
     
     public void updateScore()
