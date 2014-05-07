@@ -40,6 +40,7 @@ public class TileAdapter extends BaseAdapter {
 	    }
 	    
 	    private void initializeMap() {
+	    	//This map sets the colors of each of the tiles to their respective values from the original 2048 game
 	    	colorMap.append(0, Integer.valueOf(0xFFCCC0B3));
 	    	colorMap.append(2, Integer.valueOf(0xFFEEE4DA));
 	    	colorMap.append(4, Integer.valueOf(0xFFEDE0C8));
@@ -66,8 +67,8 @@ public class TileAdapter extends BaseAdapter {
 	        return 0;
 	    }
 
-	    // create a new ImageView for each item referenced by the Adapter
-	    @TargetApi(Build.VERSION_CODES.JELLY_BEAN) public View getView(int position, View convertView, ViewGroup parent) {
+	    @TargetApi(Build.VERSION_CODES.JELLY_BEAN) 
+	    public View getView(int position, View convertView, ViewGroup parent) {
 	    	View v;
 	        if (convertView == null) {
 	            v = mInflater.inflate(mResource, parent, false);
@@ -75,7 +76,7 @@ public class TileAdapter extends BaseAdapter {
 	            v = convertView;
 	        }
 	        
-	        TextView text = (TextView) v.findViewById(R.id.text); //"#EEE4DA"
+	        TextView text = (TextView) v.findViewById(R.id.text);
 	        int tileNumber = game.getTile(position);
 	        if (tileNumber == 0)
 	        	text.setText("");

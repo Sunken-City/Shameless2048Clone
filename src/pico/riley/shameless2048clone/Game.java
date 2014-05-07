@@ -21,6 +21,14 @@ public class Game {
 		print();
 	}
 	
+	public void newGame()
+	{
+		score = 0;
+		rand = new Random();
+		board = new int[4][4];
+		addRandomTile();
+	}
+	
 	public int[][] getGrid()
 	{
 		return board;

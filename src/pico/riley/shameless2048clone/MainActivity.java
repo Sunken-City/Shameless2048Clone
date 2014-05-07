@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView scoreText;
     private TextView bestText;
     private TextView gameOverText;
+    private TextView newGame;
     private int score = 0;
     private int bestScore = 0;
     
@@ -35,6 +37,7 @@ public class MainActivity extends ActionBarActivity {
         scoreText = (TextView)this.findViewById(R.id.scoreText);
         bestText = (TextView)this.findViewById(R.id.bestScoreText);
         gameOverText = (TextView)this.findViewById(R.id.gameOverText);
+        newGame = (TextView)this.findViewById(R.id.newGame);
         gameView = (GridView)this.findViewById(R.id.grid_view);
 
     	scoreText.setText(Integer.toString(score));
@@ -43,6 +46,12 @@ public class MainActivity extends ActionBarActivity {
         lowestLayout.setOnTouchListener(activitySwipeDetector);
         gameView.setOnTouchListener(activitySwipeDetector);
         gameView.setAdapter(gameAdapter);
+        newGame.setOnClickListener(new OnClickListener() {
+        	public void onClick(View v) {
+        		game.newGame();
+        	    gameAdapter.notifyDataSetChanged();
+        	}
+        });
     }
     
     public void loseGame()
