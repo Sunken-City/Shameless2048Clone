@@ -14,34 +14,31 @@ static final String logTag = "ActivitySwipeDetector";
 private Activity activity;
 static final int MIN_DISTANCE = 100;
 private float downX, downY, upX, upY;
-private Game g = new Game();
+private Game g;
 
-public ActivitySwipeDetector(Activity activity){
+public ActivitySwipeDetector(Activity activity, Game game){
     this.activity = activity;
+    this.g = game;
 }
 
 public void onLeftSwipe(){
     Log.i(logTag, "Left Swipe!");
     g.makeMove(Direction.LEFT);
-    //((MainActivity) activity).onLeftSwipe();
 }
 
 public void onRightSwipe(){
     Log.i(logTag, "Right Swipe!");
     g.makeMove(Direction.RIGHT);
-    //((MainActivity) activity).onRightSwipe();
 }
 
 public void onDownSwipe(){
     Log.i(logTag, "Down Swipe!");
     g.makeMove(Direction.DOWN);
-    //((MainActivity) activity).onDownSwipe();
 }
 
 public void onUpSwipe(){
     Log.i(logTag, "Up Swipe!");
     g.makeMove(Direction.UP);
-    //((MainActivity) activity).onUpSwipe();
 }
 
 public boolean onTouch(View v, MotionEvent event) {

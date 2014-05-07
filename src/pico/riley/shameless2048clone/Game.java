@@ -19,6 +19,18 @@ public class Game {
 		print();
 	}
 	
+	public int[][] getGrid()
+	{
+		return board;
+	}
+	
+	public int getTile(int tileNumber)
+	{
+		int x = tileNumber % 4;
+		int y = tileNumber / 4;
+		return board[y][x];
+	}
+	
 	public void print()
 	{
 		for(int[] y : board)
