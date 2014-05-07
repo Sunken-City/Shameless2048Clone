@@ -1,5 +1,6 @@
 package pico.riley.shameless2048clone;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -14,6 +15,8 @@ public class MainActivity extends ActionBarActivity {
 
 	static final String logTag = "ActivitySwipeDetector";
 	static final int MIN_DISTANCE = 100;
+	static final String preference = "SHAMELESS_2048_CLONE";
+	static final String key = "BEST_SCORE";
     private RelativeLayout lowestLayout;
     private RelativeLayout gameOverView;
     private GridView gameView;
@@ -23,6 +26,8 @@ public class MainActivity extends ActionBarActivity {
     private TextView bestText;
     private TextView newGame;
     private TextView tryAgain;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor preferenceEditor;
     private int score = 0;
     private int bestScore = 0;
     
@@ -32,6 +37,10 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         
         game = new Game();
+        preferences = getApplicationContext().getSharedPreferences(preference, 0); 
+        preferenceEditor = preferences.edit();
+        
+        bestScore = preferences.getInt(key, 0);
         
         gameAdapter = new TileAdapter(this, R.layout.tilelayout, game);
         lowestLayout = (RelativeLayout)this.findViewById(R.id.lowestLayout);
@@ -54,6 +63,9 @@ public class MainActivity extends ActionBarActivity {
         		game.newGame();
         	    gameAdapter.notifyDataSetChanged();
             	gameOverView.setVisibility(View.GONE);
+            	gameOverView.getBackground().setAlpha(255);
+            	preferenceEditor.putInt(key, bestScore);
+            	preferenceEditor.commit();
         	}
         });
 
@@ -62,6 +74,9 @@ public class MainActivity extends ActionBarActivity {
         		game.newGame();
         	    gameAdapter.notifyDataSetChanged();
             	gameOverView.setVisibility(View.GONE);
+            	gameOverView.getBackground().setAlpha(255);
+            	preferenceEditor.putInt(key, bestScore);
+            	preferenceEditor.commit();
         	}
         });
     }
