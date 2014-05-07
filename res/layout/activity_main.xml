@@ -11,22 +11,24 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:textSize="30sp"
+        android:textSize="60sp"
         android:textColor="#776E65"
+        android:textStyle="bold"
         android:text="@string/title"/>
     
     <GridView
 	    android:id="@+id/grid_view"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:numColumns="auto_fit"
-	    android:columnWidth="70dp"
+	    android:numColumns="4"
+	    android:columnWidth="6dp"
 	    android:horizontalSpacing="10dp"
 	    android:verticalSpacing="10dp"
-	    android:padding = "5dp"
+	    android:layout_margin= "10dp"
+	    android:padding = "10dp"
 	    android:gravity="center"
 	    android:stretchMode="columnWidth" 
-	    android:background="#BBADA0"
+	    android:background="@drawable/board"
 	    android:layout_centerInParent="true">  
 	</GridView>
 	

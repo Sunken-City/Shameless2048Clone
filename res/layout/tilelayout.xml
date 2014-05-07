@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tileBackground"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="75dp"
     android:background="@drawable/tile" >
     
     <TextView android:id="@+id/text"
@@ -11,6 +11,7 @@
         android:layout_centerInParent="true"
         android:textSize="30sp"
         android:textColor="#776E65"
+        android:textStyle="bold"
         />
 
 </RelativeLayout>

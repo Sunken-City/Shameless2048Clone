@@ -40,11 +40,11 @@ public class TileAdapter extends BaseAdapter {
 	    	colorMap.append(16, Integer.valueOf(0xFFf59563));
 	    	colorMap.append(32, Integer.valueOf(0xFFf67c5f));
 	    	colorMap.append(64, Integer.valueOf(0xFFf65e3b));
-	    	colorMap.append(128, Integer.valueOf(0xFFf65e3b));
-	    	colorMap.append(256, Integer.valueOf(0xFFf65e3b));
-	    	colorMap.append(512, Integer.valueOf(0xFFf65e3b));
-	    	colorMap.append(1024, Integer.valueOf(0xFFf65e3b));
-	    	colorMap.append(2048, Integer.valueOf(0xFFf65e3b));
+	    	colorMap.append(128, Integer.valueOf(0xFFedcf72));
+	    	colorMap.append(256, Integer.valueOf(0xFFedcc61));
+	    	colorMap.append(512, Integer.valueOf(0xFFedc850));
+	    	colorMap.append(1024, Integer.valueOf(0xFFedc53f));
+	    	colorMap.append(2048, Integer.valueOf(0xFFedc22e));
 		}
 
 		public int getCount() {
@@ -74,6 +74,11 @@ public class TileAdapter extends BaseAdapter {
 	        	text.setText("");
 	        else
 	        	text.setText(Integer.toString(tileNumber));
+	        
+	        if(tileNumber > 4)
+	        	text.setTextColor(0xFFF9F6F2);
+	        else
+	        	text.setTextColor(0xFF776E65);
 
 	        
 	        RelativeLayout tile = (RelativeLayout) v.findViewById(R.id.tileBackground);
