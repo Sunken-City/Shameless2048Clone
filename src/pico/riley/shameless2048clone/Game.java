@@ -47,14 +47,14 @@ public class Game {
 	
 	public boolean makeMove(Direction dir)
 	{
-		shift(dir);
-		addTwo();
-		print();
-		return true;
+		if(shift(dir)) //If this move is significant (makes a change in game state)
+			return addTwo(); //Return whether or not there was space to add a two
+		return true; //The move wasn't significant, let the player move again.
 	}
 	
-	public void shift(Direction dir)
+	public boolean shift(Direction dir)
 	{
+		boolean moveMade = false;
 		if (dir == Direction.LEFT)
 		{
 			for(int y = 0; y < 4; y++)
@@ -72,12 +72,13 @@ public class Game {
 							currX--;
 							board[y][currX] = thisTile; //Move the tile to the left one
 							nextTile = (currX - 1 > -1) ? board[y][currX - 1] : -1; //Set the next tile to the next tile left
+							moveMade = true;
 						}
-						
 						if (nextTile == thisTile)
 						{
 							board[y][currX - 1] = thisTile + nextTile;
 							board[y][currX] = 0;
+							moveMade = true;
 						}
 					}
 				}
@@ -100,12 +101,14 @@ public class Game {
 							currX++;
 							board[y][currX] = thisTile; //Move the tile to the right one
 							nextTile = (currX + 1 < 4) ? board[y][currX + 1] : -1; //Set the next tile to the next tile right
+							moveMade = true;
 						}
 						
 						if (nextTile == thisTile)
 						{
 							board[y][currX + 1] = thisTile + nextTile;
 							board[y][currX] = 0;
+							moveMade = true;
 						}
 					}
 				}
@@ -128,12 +131,14 @@ public class Game {
 							currY--;
 							board[currY][x] = thisTile; //Move the tile to the upper one
 							nextTile = (currY - 1 > -1) ? board[currY - 1][x] : -1; //Set the next tile to the next tile up
+							moveMade = true;
 						}
 						
 						if (nextTile == thisTile)
 						{
 							board[currY - 1][x] = thisTile + nextTile;
 							board[currY][x] = 0;
+							moveMade = true;
 						}
 					}
 				}
@@ -156,17 +161,21 @@ public class Game {
 							currY++;
 							board[currY][x] = thisTile; //Move the tile to the upper one
 							nextTile = (currY + 1 < 4) ? board[currY + 1][x] : -1; //Set the next tile to the next tile up
+							moveMade = true;
 						}
 						
 						if (nextTile == thisTile)
 						{
 							board[currY + 1][x] = thisTile + nextTile;
 							board[currY][x] = 0;
+							moveMade = true;
 						}
 					}
 				}
 			}
 		}
+		
+		return moveMade;
 	}
 	
 	public boolean addTwo()

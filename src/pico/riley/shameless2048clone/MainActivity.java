@@ -38,11 +38,5 @@ public class MainActivity extends ActionBarActivity {
         gameView = (GridView)this.findViewById(R.id.grid_view);
         gameView.setOnTouchListener(activitySwipeDetector);
         gameView.setAdapter(gameAdapter);
-
-        gameView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }
