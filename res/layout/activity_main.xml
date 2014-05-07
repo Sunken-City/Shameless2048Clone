@@ -6,6 +6,15 @@
     tools:context="pico.riley.shameless2048clone.MainActivity"
     tools:ignore="MergeRootFrame">
     
+    <TextView android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="30sp"
+        android:textColor="#776E65"
+        android:text="@string/title"/>
+    
     <GridView
 	    android:id="@+id/grid_view"
 	    android:layout_width="wrap_content"
@@ -17,7 +26,8 @@
 	    android:padding = "5dp"
 	    android:gravity="center"
 	    android:stretchMode="columnWidth" 
-	    android:background="#999999">  
+	    android:background="#BBADA0"
+	    android:layout_centerInParent="true">  
 	</GridView>
 	
 </RelativeLayout>
