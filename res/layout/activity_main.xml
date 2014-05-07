@@ -5,16 +5,67 @@
     android:layout_height="match_parent"
     tools:context="pico.riley.shameless2048clone.MainActivity"
     tools:ignore="MergeRootFrame">
-    
-    <TextView android:id="@+id/text"
+        
+    <TextView android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:textSize="60sp"
+        android:textSize="70sp"
         android:textColor="#776E65"
         android:textStyle="bold"
-        android:text="@string/title"/>
+        android:text="@string/title"
+        android:lineSpacingExtra="-15sp"/>
+    
+    <LinearLayout android:id="@+id/bestScoreBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/titleText"
+        android:padding = "5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/scorebox">
+        <TextView android:id="@+id/bestScoreLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:textColor="#eee4da"
+	        android:textStyle="bold"
+	        android:text="@string/best"/>
+        <TextView android:id="@+id/bestScoreText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:textColor="#F9F6F2"
+	        android:textStyle="bold"
+	        android:textSize="25sp"/>
+    </LinearLayout>
+    
+    <LinearLayout android:id="@+id/scoreBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toLeftOf="@id/bestScoreBox"
+        android:layout_alignBottom="@id/titleText"
+        android:padding = "5dp"
+        android:background="@drawable/scorebox">
+        <TextView android:id="@+id/scoreLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:textColor="#eee4da"
+	        android:textStyle="bold"
+	        android:text="@string/score"/>
+        <TextView android:id="@+id/scoreText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:textColor="#F9F6F2"
+	        android:textStyle="bold"
+	        android:textSize="25sp"/>
+    </LinearLayout>    
     
     <GridView
 	    android:id="@+id/grid_view"

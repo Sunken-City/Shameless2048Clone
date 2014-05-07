@@ -32,6 +32,13 @@ public class TileAdapter extends BaseAdapter {
 			initializeMap();
 	    }
 
+	    @Override
+	    public void notifyDataSetChanged()
+	    {
+	    	super.notifyDataSetChanged();
+	    	((MainActivity)mContext).updateScore();
+	    }
+	    
 	    private void initializeMap() {
 	    	colorMap.append(0, Integer.valueOf(0xFFCCC0B3));
 	    	colorMap.append(2, Integer.valueOf(0xFFEEE4DA));

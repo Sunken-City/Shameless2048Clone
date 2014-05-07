@@ -7,10 +7,12 @@ import android.util.Log;
 public class Game {
 	private int[][] board;
 	private Random rand;
+	private int score;
 	enum Direction {UP, DOWN, LEFT, RIGHT};
 	
 	public Game()
 	{
+		score = 0;
 		rand = new Random();
 		board = new int[4][4];
 		addTwo();
@@ -77,6 +79,7 @@ public class Game {
 						if (nextTile == thisTile)
 						{
 							board[y][currX - 1] = thisTile + nextTile;
+							score += thisTile + nextTile;
 							board[y][currX] = 0;
 							moveMade = true;
 						}
@@ -107,6 +110,7 @@ public class Game {
 						if (nextTile == thisTile)
 						{
 							board[y][currX + 1] = thisTile + nextTile;
+							score += thisTile + nextTile;
 							board[y][currX] = 0;
 							moveMade = true;
 						}
@@ -137,6 +141,7 @@ public class Game {
 						if (nextTile == thisTile)
 						{
 							board[currY - 1][x] = thisTile + nextTile;
+							score += thisTile + nextTile;
 							board[currY][x] = 0;
 							moveMade = true;
 						}
@@ -167,6 +172,7 @@ public class Game {
 						if (nextTile == thisTile)
 						{
 							board[currY + 1][x] = thisTile + nextTile;
+							score += thisTile + nextTile;
 							board[currY][x] = 0;
 							moveMade = true;
 						}
@@ -219,5 +225,10 @@ public class Game {
 			}
 		}
 		return false;
+	}
+	
+	public int getScore()
+	{
+		return score;
 	}
 }
