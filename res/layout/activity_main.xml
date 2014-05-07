@@ -59,6 +59,29 @@
 	        android:layout_gravity="center_horizontal"/>
     </LinearLayout>    
     
+    <TextView android:id="@+id/newGame"
+        style="@style/scoreLabel"
+        android:background="@drawable/button"
+        android:padding = "10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scoreBox"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/newGame"/>
+    
+    <TextView android:id="@+id/instructions"
+        style="@style/instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scoreBox"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="3dp"
+        android:text="@string/instructions"/>
+    
     <GridView
 	    android:id="@+id/grid_view"
 	    android:layout_width="wrap_content"
@@ -72,7 +95,8 @@
 	    android:gravity="center"
 	    android:stretchMode="columnWidth" 
 	    android:background="@drawable/board"
-	    android:layout_centerInParent="true">  
+	    android:layout_centerHorizontal="true"
+        android:layout_below="@id/newGame">  
 	</GridView>
 	
     
