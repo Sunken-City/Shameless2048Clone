@@ -15,7 +15,7 @@ public class Game {
 		score = 0;
 		rand = new Random();
 		board = new int[4][4];
-		addTwo();
+		addRandomTile();
 		Log.i("GAME", "Welcome to 2048!");
 		Log.i("GAME", "----------------------------");
 		print();
@@ -51,7 +51,7 @@ public class Game {
 	{
 		if(shift(dir)) //If this move is significant (makes a change in game state)
 		{
-			addTwo();
+			addRandomTile();
 		}
 		if(isNotFull())
 			return true;
@@ -65,12 +65,10 @@ public class Game {
 		{
 			for(int x = 0; x < 4; x++)
 			{
+				//Because of the way we iterate, we only need to check the tiles below and to the right of us
 				int thisTile = board[y][x];
-				//int leftTile = (x - 1 > -1) ? board[y][x - 1] : -1;
 				int rightTile = (x + 1 < 4) ? board[y][x + 1] : -1;
-				//int upTile = (y - 1 > -1) ? board[y - 1][x] : -1;
 				int downTile = (y + 1 < 4) ? board[y + 1][x] : -1;
-				//if((thisTile == leftTile) || (thisTile == rightTile) || (thisTile == upTile) || (thisTile == downTile))
 				if((thisTile == rightTile) || (thisTile == downTile))
 					return true;
 			}
@@ -208,7 +206,7 @@ public class Game {
 		return moveMade;
 	}
 	
-	public boolean addTwo()
+	public boolean addRandomTile()
 	{
 		if (isNotFull())
 		{
@@ -219,12 +217,12 @@ public class Game {
 				x = rand.nextInt(4);
 				y = rand.nextInt(4);
 			}
-			board[y][x] = 2;
-			return true; //Placed a 2
+			board[y][x] = rand.nextInt(10) < 8 ? 2 : 4;
+			return true; //Placed a new tile
 		}
 		else
 		{
-			return false; //Couldn't place a 2, game might be over.
+			return false; //Couldn't place a new tile, game might be over.
 		}
 	}
 	

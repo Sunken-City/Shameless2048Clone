@@ -8,7 +8,7 @@
     <string name="score">Score</string>
     <string name="best">Best</string>
     <string name="developer">Developer: Anthony Cloudy</string>
-    <string name="gameOver">Game Over</string>
+    <string name="gameOver">Game over!</string>
     <string name="newGame">New Game</string>
     <string name="instructions">Join the numbers and get to the 2048 tile!</string>
 

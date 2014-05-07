@@ -101,11 +101,16 @@
 	
     
     <TextView android:id="@+id/gameOverText"
-        style="@style/titleTheme"
+        style="@style/gameOver"
+        android:background="@drawable/board"
         android:visibility="gone"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_centerInParent="true"
+	    android:gravity="center"
+        android:layout_alignTop="@id/grid_view"
+        android:layout_alignBottom="@id/grid_view"
+        android:layout_alignLeft="@id/grid_view"
+        android:layout_alignRight="@id/grid_view"
 	    android:text="@string/gameOver"/>
 	
 </RelativeLayout>

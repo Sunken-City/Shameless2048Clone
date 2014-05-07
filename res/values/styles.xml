@@ -23,6 +23,12 @@
         <item name="android:textStyle">bold</item>        
     </style>
     
+    <style name="gameOver">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textColor">#776E65</item>
+        <item name="android:textStyle">bold</item>        
+    </style>
+    
     <style name="instructions">
         <item name="android:textColor">#776E65</item>
         <item name="android:textStyle">bold</item>        
