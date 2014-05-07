@@ -2,6 +2,8 @@ package pico.riley.shameless2048clone;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -49,5 +51,11 @@ public class MainActivity extends ActionBarActivity {
     		bestScore = score;
     		bestText.setText(Integer.toString(bestScore));
     	}
+    }
+    
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
     }
 }
