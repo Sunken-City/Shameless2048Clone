@@ -99,20 +99,35 @@
         android:layout_below="@id/newGame">  
 	</GridView>
 	
-    
-    <TextView android:id="@+id/gameOverText"
-        style="@style/gameOver"
-        android:background="@drawable/board"
-        android:visibility="gone"
+    <RelativeLayout android:id="@+id/endGame"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:gravity="center"
+        android:background="@drawable/board"
+        android:visibility="gone"
         android:layout_alignTop="@id/grid_view"
         android:layout_alignBottom="@id/grid_view"
         android:layout_alignLeft="@id/grid_view"
-        android:layout_alignRight="@id/grid_view"
-	    android:text="@string/gameOver"/>
-	
+        android:layout_alignRight="@id/grid_view">
+        
+	    <TextView android:id="@+id/gameOverText"
+	        style="@style/gameOver"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_centerInParent="true"
+		    android:text="@string/gameOver"/>
+	    
+	    <TextView android:id="@+id/tryAgain"
+	        style="@style/scoreLabel"
+	        android:background="@drawable/button"
+	        android:padding = "10dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/gameOverText"
+	        android:layout_centerHorizontal="true"
+	        android:gravity="center"
+	        android:text="@string/tryAgain"/>
+	    
+	</RelativeLayout>
 </RelativeLayout>
 <!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

@@ -15,13 +15,14 @@ public class MainActivity extends ActionBarActivity {
 	static final String logTag = "ActivitySwipeDetector";
 	static final int MIN_DISTANCE = 100;
     private RelativeLayout lowestLayout;
+    private RelativeLayout gameOverView;
     private GridView gameView;
     private Game game;
     private TileAdapter gameAdapter;
     private TextView scoreText;
     private TextView bestText;
-    private TextView gameOverText;
     private TextView newGame;
+    private TextView tryAgain;
     private int score = 0;
     private int bestScore = 0;
     
@@ -34,10 +35,11 @@ public class MainActivity extends ActionBarActivity {
         
         gameAdapter = new TileAdapter(this, R.layout.tilelayout, game);
         lowestLayout = (RelativeLayout)this.findViewById(R.id.lowestLayout);
+        gameOverView = (RelativeLayout)this.findViewById(R.id.endGame);
         scoreText = (TextView)this.findViewById(R.id.scoreText);
         bestText = (TextView)this.findViewById(R.id.bestScoreText);
-        gameOverText = (TextView)this.findViewById(R.id.gameOverText);
         newGame = (TextView)this.findViewById(R.id.newGame);
+        tryAgain = (TextView)this.findViewById(R.id.tryAgain);
         gameView = (GridView)this.findViewById(R.id.grid_view);
 
     	scoreText.setText(Integer.toString(score));
@@ -46,18 +48,28 @@ public class MainActivity extends ActionBarActivity {
         lowestLayout.setOnTouchListener(activitySwipeDetector);
         gameView.setOnTouchListener(activitySwipeDetector);
         gameView.setAdapter(gameAdapter);
+        
         newGame.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		game.newGame();
         	    gameAdapter.notifyDataSetChanged();
+            	gameOverView.setVisibility(View.GONE);
+        	}
+        });
+
+        tryAgain.setOnClickListener(new OnClickListener() {
+        	public void onClick(View v) {
+        		game.newGame();
+        	    gameAdapter.notifyDataSetChanged();
+            	gameOverView.setVisibility(View.GONE);
         	}
         });
     }
     
     public void loseGame()
     {
-    	gameOverText.setVisibility(View.VISIBLE);
-    	gameOverText.getBackground().setAlpha(128);
+    	gameOverView.setVisibility(View.VISIBLE);
+    	gameOverView.getBackground().setAlpha(128);
     }
     
     public void updateScore()

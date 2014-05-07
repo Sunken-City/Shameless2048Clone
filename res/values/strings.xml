@@ -10,6 +10,7 @@
     <string name="developer">Developer: Anthony Cloudy</string>
     <string name="gameOver">Game over!</string>
     <string name="newGame">New Game</string>
+    <string name="tryAgain">Try again</string>
     <string name="instructions">Join the numbers and get to the 2048 tile!</string>
 
 </resources>
