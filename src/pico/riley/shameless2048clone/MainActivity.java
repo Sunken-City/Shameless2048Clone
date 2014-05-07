@@ -22,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
     private RelativeLayout lowestLayout;
     private GridView gameView;
     private Game game;
+    private TileAdapter gameAdapter;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +30,14 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         
         game = new Game();
-        
-        ActivitySwipeDetector activitySwipeDetector = new ActivitySwipeDetector(this, game);
+
+        gameAdapter = new TileAdapter(this, R.layout.tilelayout, game);
+        ActivitySwipeDetector activitySwipeDetector = new ActivitySwipeDetector(gameAdapter, game);
         lowestLayout = (RelativeLayout)this.findViewById(R.id.lowestLayout);
         lowestLayout.setOnTouchListener(activitySwipeDetector);
         gameView = (GridView)this.findViewById(R.id.grid_view);
         gameView.setOnTouchListener(activitySwipeDetector);
-        gameView.setAdapter(new TileAdapter(this, R.layout.tilelayout, game));
+        gameView.setAdapter(gameAdapter);
 
         gameView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {

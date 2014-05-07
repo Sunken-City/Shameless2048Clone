@@ -1,44 +1,47 @@
 package pico.riley.shameless2048clone;
 
 import pico.riley.shameless2048clone.Game.Direction;
-import android.app.Activity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.GridView;
 
 //Using code from http://stackoverflow.com/questions/937313/android-basic-gesture-detection
 public class ActivitySwipeDetector implements View.OnTouchListener {
 
 static final String logTag = "ActivitySwipeDetector";
-private Activity activity;
+private TileAdapter gameAdapter;
 static final int MIN_DISTANCE = 100;
 private float downX, downY, upX, upY;
 private Game g;
 
-public ActivitySwipeDetector(Activity activity, Game game){
-    this.activity = activity;
+public ActivitySwipeDetector(TileAdapter gameGridAdapter, Game game){
+    this.gameAdapter = gameGridAdapter;
     this.g = game;
 }
 
 public void onLeftSwipe(){
     Log.i(logTag, "Left Swipe!");
     g.makeMove(Direction.LEFT);
+    gameAdapter.notifyDataSetChanged();
 }
 
 public void onRightSwipe(){
     Log.i(logTag, "Right Swipe!");
     g.makeMove(Direction.RIGHT);
+    gameAdapter.notifyDataSetChanged();
 }
 
 public void onDownSwipe(){
     Log.i(logTag, "Down Swipe!");
     g.makeMove(Direction.DOWN);
+    gameAdapter.notifyDataSetChanged();
 }
 
 public void onUpSwipe(){
     Log.i(logTag, "Up Swipe!");
     g.makeMove(Direction.UP);
+    gameAdapter.notifyDataSetChanged();
 }
 
 public boolean onTouch(View v, MotionEvent event) {
