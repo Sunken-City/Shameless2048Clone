@@ -16,6 +16,7 @@ public class Game {
 		rand = new Random();
 		board = new int[4][4];
 		addRandomTile();
+		addRandomTile();
 		Log.i("GAME", "Welcome to 2048!");
 		Log.i("GAME", "----------------------------");
 		print();
@@ -27,11 +28,42 @@ public class Game {
 		rand = new Random();
 		board = new int[4][4];
 		addRandomTile();
+		addRandomTile();
 	}
 	
 	public int[][] getGrid()
 	{
 		return board;
+	}
+	
+	@Override public String toString() 
+	{
+		String encodedBoard = "";
+		for(int[] y : board)
+		{
+			for(int x : y)
+			{
+				encodedBoard += x + "_";
+			}
+		}	
+		return encodedBoard;
+	}
+	
+	public void parseBoard(String encodedBoard)
+	{
+		if (encodedBoard != "")
+		{
+			String[] parts = encodedBoard.split("_");
+			int counter = 0;
+			for(int y = 0; y < 4; y++)
+			{
+				for(int x = 0; x < 4; x++)
+				{
+					board[y][x] = Integer.parseInt(parts[counter]);
+					counter++;
+				}
+			}	
+		}
 	}
 	
 	public int getTile(int tileNumber)
@@ -263,5 +295,10 @@ public class Game {
 	public int getScore()
 	{
 		return score;
+	}
+	
+	public void setScore(int score)
+	{
+		this.score = score;
 	}
 }

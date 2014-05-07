@@ -16,7 +16,10 @@ public class MainActivity extends ActionBarActivity {
 	static final String logTag = "ActivitySwipeDetector";
 	static final int MIN_DISTANCE = 100;
 	static final String preference = "SHAMELESS_2048_CLONE";
-	static final String key = "BEST_SCORE";
+	static final String bestScoreKey = "BEST_SCORE";
+	static final String scoreKey = "2048_SCORE";
+	static final String boardKey = "2048_BOARD";
+	static final String interruptedKey = "2048_WAS_INTERRUPTED";
     private RelativeLayout lowestLayout;
     private RelativeLayout gameOverView;
     private GridView gameView;
@@ -40,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
         preferences = getApplicationContext().getSharedPreferences(preference, 0); 
         preferenceEditor = preferences.edit();
         
-        bestScore = preferences.getInt(key, 0);
+        bestScore = preferences.getInt(bestScoreKey, 0);
         
         gameAdapter = new TileAdapter(this, R.layout.tilelayout, game);
         lowestLayout = (RelativeLayout)this.findViewById(R.id.lowestLayout);
@@ -58,13 +61,25 @@ public class MainActivity extends ActionBarActivity {
         gameView.setOnTouchListener(activitySwipeDetector);
         gameView.setAdapter(gameAdapter);
         
+        if (preferences.getBoolean(interruptedKey, false))
+        {
+	        game.setScore(preferences.getInt(scoreKey, 0));
+	        game.parseBoard(preferences.getString(boardKey, ""));
+    	    gameAdapter.notifyDataSetChanged();
+    	    updateScore();
+        }
+
+        
         newGame.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		game.newGame();
         	    gameAdapter.notifyDataSetChanged();
             	gameOverView.setVisibility(View.GONE);
             	gameOverView.getBackground().setAlpha(255);
-            	preferenceEditor.putInt(key, bestScore);
+            	preferenceEditor.putInt(bestScoreKey, bestScore);
+            	preferenceEditor.putBoolean(interruptedKey, false);
+                preferenceEditor.putInt(scoreKey, score);
+            	preferenceEditor.putString(boardKey, game.toString());
             	preferenceEditor.commit();
         	}
         });
@@ -75,10 +90,24 @@ public class MainActivity extends ActionBarActivity {
         	    gameAdapter.notifyDataSetChanged();
             	gameOverView.setVisibility(View.GONE);
             	gameOverView.getBackground().setAlpha(255);
-            	preferenceEditor.putInt(key, bestScore);
+            	preferenceEditor.putInt(bestScoreKey, bestScore);
+            	preferenceEditor.putBoolean(interruptedKey, false);
+                preferenceEditor.putInt(scoreKey, score);
+            	preferenceEditor.putString(boardKey, game.toString());
             	preferenceEditor.commit();
         	}
         });
+    }
+    
+    @Override
+    protected void onStop() 
+    {
+    	super.onStop();
+    	preferenceEditor.putInt(bestScoreKey, bestScore);
+    	preferenceEditor.putBoolean(interruptedKey, true);
+        preferenceEditor.putInt(scoreKey, score);
+    	preferenceEditor.putString(boardKey, game.toString());
+    	preferenceEditor.commit();
     }
     
     public void loseGame()

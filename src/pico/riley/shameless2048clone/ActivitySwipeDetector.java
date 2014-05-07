@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.GridView;
 
 //Using code from http://stackoverflow.com/questions/937313/android-basic-gesture-detection
+//I submitted a bug fix for the solution and got it approved, so that's why they look identical now. 
 public class ActivitySwipeDetector implements View.OnTouchListener {
 
 static final String logTag = "ActivitySwipeDetector";
