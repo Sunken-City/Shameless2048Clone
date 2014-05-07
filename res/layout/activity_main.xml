@@ -83,6 +83,17 @@
 	    android:layout_centerInParent="true">  
 	</GridView>
 	
+    
+    <TextView android:id="@+id/gameOverText"
+         android:visibility="gone"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_centerInParent="true"
+	     android:textColor="#F9F6F2"
+	     android:textStyle="bold"
+	     android:textSize="60sp"
+	     android:text="@string/gameOver"/>
+	
 </RelativeLayout>
 <!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

@@ -50,10 +50,34 @@ public class Game {
 	public boolean makeMove(Direction dir)
 	{
 		if(shift(dir)) //If this move is significant (makes a change in game state)
-			return addTwo(); //Return whether or not there was space to add a two
-		return true; //The move wasn't significant, let the player move again.
+		{
+			addTwo();
+		}
+		if(isNotFull())
+			return true;
+		else
+			return moveAvailable(); //The move wasn't significant, let the player move again.
 	}
 	
+	private boolean moveAvailable() //Check each of the tiles against one another to see if any moves can be made 
+	{
+		for(int y = 0; y < 4; y++)
+		{
+			for(int x = 0; x < 4; x++)
+			{
+				int thisTile = board[y][x];
+				//int leftTile = (x - 1 > -1) ? board[y][x - 1] : -1;
+				int rightTile = (x + 1 < 4) ? board[y][x + 1] : -1;
+				//int upTile = (y - 1 > -1) ? board[y - 1][x] : -1;
+				int downTile = (y + 1 < 4) ? board[y + 1][x] : -1;
+				//if((thisTile == leftTile) || (thisTile == rightTile) || (thisTile == upTile) || (thisTile == downTile))
+				if((thisTile == rightTile) || (thisTile == downTile))
+					return true;
+			}
+		}
+		return false;
+	}
+
 	public boolean shift(Direction dir)
 	{
 		boolean moveMade = false;
@@ -198,7 +222,10 @@ public class Game {
 			board[y][x] = 2;
 			return true; //Placed a 2
 		}
-		return false; //Couldn't place a 2, game is over.
+		else
+		{
+			return false; //Couldn't place a 2, game might be over.
+		}
 	}
 	
 	public boolean isNotFull()

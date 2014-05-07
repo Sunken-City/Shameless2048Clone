@@ -8,5 +8,6 @@
     <string name="score">Score</string>
     <string name="best">Best</string>
     <string name="developer">Developer: Anthony Cloudy</string>
+    <string name="gameOver">Game Over</string>
 
 </resources>

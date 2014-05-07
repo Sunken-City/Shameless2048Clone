@@ -31,7 +31,7 @@ public class TileAdapter extends BaseAdapter {
 			this.mInflater = LayoutInflater.from(mContext);
 			initializeMap();
 	    }
-
+	    
 	    @Override
 	    public void notifyDataSetChanged()
 	    {
