@@ -13,5 +13,6 @@
     <string name="tryAgain">Try again</string>
     <string name="instructions">Join the numbers and get to the 2048 tile!</string>
     <string name="howToPlay">HOW TO PLAY: Swipe to move the tiles. When two tiles with the same number touch, they merge into one!</string>
-
+	<string name="resetBest">Reset best score</string>
+	<string name="showHelp">Show help message</string>
 </resources>

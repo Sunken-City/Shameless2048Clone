@@ -11,5 +11,11 @@
     <item
         android:id="@+id/developer_button"
         android:title="@string/developer"/>
+    <item
+        android:id="@+id/resetBestButton"
+        android:title="@string/resetBest"/>
+    <item
+        android:id="@+id/showHelpButton"
+        android:title="@string/showHelp"/>
 
 </menu>
