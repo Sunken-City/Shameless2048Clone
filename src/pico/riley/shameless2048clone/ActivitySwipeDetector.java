@@ -23,40 +23,37 @@ public ActivitySwipeDetector(TileAdapter gameGridAdapter, Game game, MainActivit
     this.activity = activity;
 }
 
-public void onLeftSwipe(){
-    Log.i(logTag, "Left Swipe!");
-    if(!game.makeMove(Direction.LEFT))
+public void move(Direction dir)
+{
+    if(!game.makeMove(dir))
     {
     	activity.loseGame();
     }
+    if(game.hasWon())
+    {
+    	activity.winGame();
+    }
     gameAdapter.notifyDataSetChanged();
+}
+
+public void onLeftSwipe(){
+    Log.i(logTag, "Left Swipe!");
+    move(Direction.LEFT);
 }
 
 public void onRightSwipe(){
     Log.i(logTag, "Right Swipe!");
-    if(!game.makeMove(Direction.RIGHT))
-    {
-    	activity.loseGame();
-    }
-    gameAdapter.notifyDataSetChanged();
+    move(Direction.RIGHT);
 }
 
 public void onDownSwipe(){
     Log.i(logTag, "Down Swipe!");
-    if(!game.makeMove(Direction.DOWN))
-    {
-    	activity.loseGame();
-    }
-    gameAdapter.notifyDataSetChanged();
+    move(Direction.DOWN);
 }
 
 public void onUpSwipe(){
     Log.i(logTag, "Up Swipe!");
-    if(!game.makeMove(Direction.UP))
-    {
-    	activity.loseGame();
-    }
-    gameAdapter.notifyDataSetChanged();
+    move(Direction.UP);
 }
 
 public boolean onTouch(View v, MotionEvent event) {

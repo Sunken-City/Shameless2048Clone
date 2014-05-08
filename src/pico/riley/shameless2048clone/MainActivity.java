@@ -1,5 +1,6 @@
 package pico.riley.shameless2048clone;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -33,11 +34,13 @@ public class MainActivity extends ActionBarActivity {
     private TextView newGame;
     private TextView tryAgain;
     private TextView howToPlay;
+    private TextView gameOverText;
     private SharedPreferences preferences;
     private SharedPreferences.Editor preferenceEditor;
     private int score = 0;
     private int bestScore = 0;
     private boolean gameLost = false;
+    private Context mContext;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,10 @@ public class MainActivity extends ActionBarActivity {
         game = new Game();
         preferences = getApplicationContext().getSharedPreferences(preference, 0); 
         preferenceEditor = preferences.edit();
-        
+        //Grab the best score before we get started.
         bestScore = preferences.getInt(bestScoreKey, 0);
-        
+
+        mContext = this;
         gameAdapter = new TileAdapter(this, R.layout.tilelayout, game);
         lowestLayout = (RelativeLayout)this.findViewById(R.id.lowestLayout);
         gameOverView = (RelativeLayout)this.findViewById(R.id.endGame);
@@ -58,6 +62,7 @@ public class MainActivity extends ActionBarActivity {
         newGame = (TextView)this.findViewById(R.id.newGame);
         tryAgain = (TextView)this.findViewById(R.id.tryAgain);
         howToPlay = (TextView)this.findViewById(R.id.howToPlay);
+        gameOverText = (TextView)this.findViewById(R.id.gameOverText);
         gameView = (GridView)this.findViewById(R.id.grid_view);
 
     	scoreText.setText(Integer.toString(score));
@@ -66,14 +71,15 @@ public class MainActivity extends ActionBarActivity {
         lowestLayout.setOnTouchListener(activitySwipeDetector);
         gameView.setOnTouchListener(activitySwipeDetector);
         gameView.setAdapter(gameAdapter);
-        
-        
+
+        //If it's your first time, show the help message
         if (preferences.getBoolean(firstTimeKey, true))
         {
         	howToPlay.setVisibility(View.VISIBLE);
         	preferenceEditor.putBoolean(firstTimeKey, false).commit();
         }
         
+        //If your game ended in a recoverable state, go and load it back up
         if (!preferences.getBoolean(interruptedKey, true))
         {
 	        game.setScore(preferences.getInt(scoreKey, 0));
@@ -82,34 +88,30 @@ public class MainActivity extends ActionBarActivity {
     	    updateScore();
         }
 
-        
         newGame.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
-        		game.newGame();
-        		gameLost = false;
-        	    gameAdapter.notifyDataSetChanged();
-            	gameOverView.setVisibility(View.GONE);
-            	gameOverView.getBackground().setAlpha(255);
-            	preferenceEditor.putInt(bestScoreKey, bestScore);
-                preferenceEditor.putInt(scoreKey, score);
-            	preferenceEditor.putString(boardKey, game.toString());
-            	preferenceEditor.commit();
+        		((MainActivity)mContext).newGame();
         	}
         });
 
         tryAgain.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
-        		game.newGame();
-        		gameLost = false;
-        	    gameAdapter.notifyDataSetChanged();
-            	gameOverView.setVisibility(View.GONE);
-            	gameOverView.getBackground().setAlpha(255);
-            	preferenceEditor.putInt(bestScoreKey, bestScore);
-                preferenceEditor.putInt(scoreKey, score);
-            	preferenceEditor.putString(boardKey, game.toString());
-            	preferenceEditor.commit();
+        		((MainActivity)mContext).newGame();
         	}
         });
+    }
+    
+    public void newGame()
+    {
+		game.newGame();
+		gameLost = false;
+	    gameAdapter.notifyDataSetChanged();
+    	gameOverView.setVisibility(View.GONE);
+    	gameOverView.getBackground().setAlpha(255);
+    	preferenceEditor.putInt(bestScoreKey, bestScore);
+        preferenceEditor.putInt(scoreKey, score);
+    	preferenceEditor.putString(boardKey, game.toString());
+    	preferenceEditor.commit();
     }
     
     @Override
@@ -127,6 +129,15 @@ public class MainActivity extends ActionBarActivity {
     {
     	gameLost = true;
     	gameOverView.setVisibility(View.VISIBLE);
+    	gameOverText.setText(R.string.gameOver);
+    	gameOverView.getBackground().setAlpha(128);
+    }
+    
+    public void winGame()
+    {
+    	gameLost = true;
+    	gameOverView.setVisibility(View.VISIBLE);
+    	gameOverText.setText(R.string.youWin);
     	gameOverView.getBackground().setAlpha(128);
     }
     

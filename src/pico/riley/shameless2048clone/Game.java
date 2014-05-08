@@ -38,6 +38,8 @@ public class Game {
 	
 	@Override public String toString() 
 	{
+		//Write out the board as a string that encodes the 16 tiles.
+		//I use this to save the state of the game board when the app is closed.
 		String encodedBoard = "";
 		for(int[] y : board)
 		{
@@ -75,6 +77,7 @@ public class Game {
 	
 	public void print()
 	{
+		//This is for log statement debugging.
 		for(int[] y : board)
 		{
 			String s = "";
@@ -140,7 +143,7 @@ public class Game {
 						}
 						if (nextTile == thisTile)
 						{
-							board[y][currX - 1] = thisTile + nextTile;
+							board[y][currX - 1] = thisTile + nextTile; //Combine the two tiles
 							score += thisTile + nextTile;
 							board[y][currX] = 0;
 							moveMade = true;
@@ -171,7 +174,7 @@ public class Game {
 						
 						if (nextTile == thisTile)
 						{
-							board[y][currX + 1] = thisTile + nextTile;
+							board[y][currX + 1] = thisTile + nextTile; //Combine the two tiles
 							score += thisTile + nextTile;
 							board[y][currX] = 0;
 							moveMade = true;
@@ -202,7 +205,7 @@ public class Game {
 						
 						if (nextTile == thisTile)
 						{
-							board[currY - 1][x] = thisTile + nextTile;
+							board[currY - 1][x] = thisTile + nextTile; //Combine the two tiles
 							score += thisTile + nextTile;
 							board[currY][x] = 0;
 							moveMade = true;
@@ -233,7 +236,7 @@ public class Game {
 						
 						if (nextTile == thisTile)
 						{
-							board[currY + 1][x] = thisTile + nextTile;
+							board[currY + 1][x] = thisTile + nextTile; //Combine the two tiles
 							score += thisTile + nextTile;
 							board[currY][x] = 0;
 							moveMade = true;
@@ -257,7 +260,7 @@ public class Game {
 				x = rand.nextInt(4);
 				y = rand.nextInt(4);
 			}
-			board[y][x] = rand.nextInt(10) < 8 ? 2 : 4;
+			board[y][x] = rand.nextInt(10) < 9 ? 2 : 4;
 			return true; //Placed a new tile
 		}
 		else
