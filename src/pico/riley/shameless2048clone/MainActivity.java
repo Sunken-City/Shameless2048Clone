@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
     private SharedPreferences.Editor preferenceEditor;
     private int score = 0;
     private int bestScore = 0;
+    private boolean gameLost = false;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
         gameView.setOnTouchListener(activitySwipeDetector);
         gameView.setAdapter(gameAdapter);
         
-        if (preferences.getBoolean(interruptedKey, false))
+        if (!preferences.getBoolean(interruptedKey, true))
         {
 	        game.setScore(preferences.getInt(scoreKey, 0));
 	        game.parseBoard(preferences.getString(boardKey, ""));
@@ -73,11 +74,11 @@ public class MainActivity extends ActionBarActivity {
         newGame.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		game.newGame();
+        		gameLost = false;
         	    gameAdapter.notifyDataSetChanged();
             	gameOverView.setVisibility(View.GONE);
             	gameOverView.getBackground().setAlpha(255);
             	preferenceEditor.putInt(bestScoreKey, bestScore);
-            	preferenceEditor.putBoolean(interruptedKey, false);
                 preferenceEditor.putInt(scoreKey, score);
             	preferenceEditor.putString(boardKey, game.toString());
             	preferenceEditor.commit();
@@ -87,11 +88,11 @@ public class MainActivity extends ActionBarActivity {
         tryAgain.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		game.newGame();
+        		gameLost = false;
         	    gameAdapter.notifyDataSetChanged();
             	gameOverView.setVisibility(View.GONE);
             	gameOverView.getBackground().setAlpha(255);
             	preferenceEditor.putInt(bestScoreKey, bestScore);
-            	preferenceEditor.putBoolean(interruptedKey, false);
                 preferenceEditor.putInt(scoreKey, score);
             	preferenceEditor.putString(boardKey, game.toString());
             	preferenceEditor.commit();
@@ -104,7 +105,7 @@ public class MainActivity extends ActionBarActivity {
     {
     	super.onStop();
     	preferenceEditor.putInt(bestScoreKey, bestScore);
-    	preferenceEditor.putBoolean(interruptedKey, true);
+    	preferenceEditor.putBoolean(interruptedKey, gameLost);
         preferenceEditor.putInt(scoreKey, score);
     	preferenceEditor.putString(boardKey, game.toString());
     	preferenceEditor.commit();
@@ -112,6 +113,7 @@ public class MainActivity extends ActionBarActivity {
     
     public void loseGame()
     {
+    	gameLost = true;
     	gameOverView.setVisibility(View.VISIBLE);
     	gameOverView.getBackground().setAlpha(128);
     }
