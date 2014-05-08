@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -20,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
 	static final String scoreKey = "2048_SCORE";
 	static final String boardKey = "2048_BOARD";
 	static final String interruptedKey = "2048_WAS_INTERRUPTED";
+	static final String firstTimeKey = "2048_FIRST_TIME";
     private RelativeLayout lowestLayout;
     private RelativeLayout gameOverView;
     private GridView gameView;
@@ -29,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView bestText;
     private TextView newGame;
     private TextView tryAgain;
+    private TextView howToPlay;
     private SharedPreferences preferences;
     private SharedPreferences.Editor preferenceEditor;
     private int score = 0;
@@ -53,6 +57,7 @@ public class MainActivity extends ActionBarActivity {
         bestText = (TextView)this.findViewById(R.id.bestScoreText);
         newGame = (TextView)this.findViewById(R.id.newGame);
         tryAgain = (TextView)this.findViewById(R.id.tryAgain);
+        howToPlay = (TextView)this.findViewById(R.id.howToPlay);
         gameView = (GridView)this.findViewById(R.id.grid_view);
 
     	scoreText.setText(Integer.toString(score));
@@ -61,6 +66,13 @@ public class MainActivity extends ActionBarActivity {
         lowestLayout.setOnTouchListener(activitySwipeDetector);
         gameView.setOnTouchListener(activitySwipeDetector);
         gameView.setAdapter(gameAdapter);
+        
+        
+        if (preferences.getBoolean(firstTimeKey, true))
+        {
+        	howToPlay.setVisibility(View.VISIBLE);
+        	preferenceEditor.putBoolean(firstTimeKey, false).commit();
+        }
         
         if (!preferences.getBoolean(interruptedKey, true))
         {
@@ -134,4 +146,27 @@ public class MainActivity extends ActionBarActivity {
         inflater.inflate(R.menu.main, menu);
         return true;
     }
+    
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	  switch (item.getItemId()) {
+    	    case R.id.resetBestButton:
+    	      resetBestScore();
+    	      return true;
+    	    case R.id.developer_button:
+    		  Toast.makeText(getBaseContext(), "Hello There! :D", Toast.LENGTH_LONG).show();
+    	      return true;
+    	    case R.id.showHelpButton:
+        	  howToPlay.setVisibility(View.VISIBLE);
+        	  preferenceEditor.putBoolean(firstTimeKey, true).commit();
+        	  return true;
+    	    default:
+    	      return super.onOptionsItemSelected(item);
+    	  }
+    	}
+
+	private void resetBestScore() {
+		bestScore = score;
+		bestText.setText(Integer.toString(bestScore));
+	    Toast.makeText(getBaseContext(), "Best Score Reset!", Toast.LENGTH_LONG).show();
+	}
 }

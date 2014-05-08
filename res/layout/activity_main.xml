@@ -131,6 +131,7 @@
 	
     <TextView android:id="@+id/howToPlay"
 	        style="@style/instructions"
+       		android:visibility="gone"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"	
